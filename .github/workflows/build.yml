@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install PHP Dependencies
-        run: "composer update && composer install --no-ansi --no-interaction --no-scripts --no-suggest --prefer-dist"
+        run: "sudo apt-get install php7.0-xmlrpc php7.0-xml && composer update && composer install --no-ansi --no-interaction --no-scripts --no-suggest --prefer-dist"
 
       - name: Execute PHPUnit
         run: test/phpunit --coverage-clover=coverage.xml

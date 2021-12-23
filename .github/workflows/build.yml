@@ -6,30 +6,6 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
-  phpunit:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Install PHP Dependencies
-        run: "composer update --no-interaction --no-suggest --no-progress && composer install --ignore-platform-reqs --no-ansi --no-interaction --no-scripts --no-suggest --prefer-dist"
-
-      - name: Execute PHPUnit
-        run: test/phpunit --coverage-clover=coverage.xml
-
-      - name: Generate code coverage image
-        run: php generate-code-coverage-image.php
-
-      - name: Commit Code Coverage Image to Repo
-        uses: EndBug/add-and-commit@v5
-        with:
-          author_name: ammar chebbi
-          author_email: me@aaronsaray.com
-          message: "Committing code coverage image"
-          add: "docs/code-coverage.png"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
